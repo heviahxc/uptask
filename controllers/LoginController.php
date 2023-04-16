@@ -11,6 +11,10 @@ class LoginController{
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             # code...
         }
+
+        $router->render('auth/login',[
+            'titulo' => 'Iniciar Sesión'
+        ]);
     }
 
     public static function logout(){
@@ -18,11 +22,15 @@ class LoginController{
     
     }
 
-    public static function crear(){
+    public static function crear(Router $router){
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             # code...
         }
+
+        $router->render('auth/crear',[
+            'titulo' => 'Crea tu cuenta en UpTask'
+        ]);
     }
 
     public static function olvide(){
