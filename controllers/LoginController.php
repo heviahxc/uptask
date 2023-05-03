@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Model\Usuario;
 use MVC\Router;
 
 class LoginController{
@@ -23,13 +24,40 @@ class LoginController{
     }
 
     public static function crear(Router $router){
-
+        $alertas = [];
+        $usuario =  new Usuario;
+        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            # code...
+            $usuario->sincronizar($_POST);
+            $alertas = $usuario->validarNuevaCuenta();
+
+            if (empty($alertas)) {
+                $existeUsuario = Usuario::where('email', $usuario->email);
+
+            if ($existeUsuario) {
+                Usuario::setAlerta('error', 'El usuario ya esta registrado');
+                $alertas = Usuario::getAlertas();
+            }else{
+                //hashear password
+                $usuario-> hashPassword();
+                //eliminar password 2
+                unset($usuario->password2);
+                //crear token
+                $usuario->crearToken();
+
+                $resultado = $usuario->guardar();
+
+                if ($resultado) {
+                    header('Location: /mensaje');
+                }
+            }
+            }
         }
 
         $router->render('auth/crear',[
-            'titulo' => 'Crea tu cuenta en UpTask'
+            'titulo' => 'Crea tu cuenta en UpTask',
+            'usuario' => $usuario,
+            'alertas' => $alertas
         ]);
     }
 
