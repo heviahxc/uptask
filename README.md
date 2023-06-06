@@ -1,6 +1,14 @@
 # uptask
 php
 
+PROYECTO PENDIENTE
+
+PASOS:
+
+- npm install node
+- npm i
+- composer update
+
 # sql:
 
 CREATE TABLE usuarios (
