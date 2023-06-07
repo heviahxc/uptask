@@ -22,4 +22,23 @@ CREATE TABLE usuarios (
   UNIQUE KEY (email)
 );
 
+CREATE TABLE proyectos (
+  id INT PRIMARY KEY,
+  proyecto VARCHAR(255),
+  url VARCHAR(255),
+  propietarioId INT
+);
 
+ALTER TABLE proyectos ADD CONSTRAINT fk_propietarioId FOREIGN KEY (propietarioId) REFERENCES usuarios(id);
+
+CREATE TABLE tareas (
+  id INT PRIMARY KEY,
+  nombre VARCHAR(255),
+  estado VARCHAR(255),
+  proyectoId INT
+);
+
+ALTER TABLE tareas
+ADD CONSTRAINT fk_proyectoId
+FOREIGN KEY (proyectoId)
+REFERENCES proyectos(id);
