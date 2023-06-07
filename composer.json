@@ -1,5 +1,5 @@
 {
-    "name": "hevia/up-task_mvc",
+    "name": "juandelatorre/up-task_mvc",
     "description": "Proyecto UpTask MVC, PHP 8, SASS",
     "type": "project",
     "autoload": {
@@ -11,6 +11,6 @@
         }
     },
     "require": {
-        "phpmailer/phpmailer": "^6.8"
+        "phpmailer/phpmailer": "^6.5"
     }
 }
